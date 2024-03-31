@@ -13,7 +13,7 @@ const customStyles = {
   },
 };
 
-export const OpenModal = ({ modalIsOpen, closeModal, src, alt }) => {
+export const ImageModal = ({ modalIsOpen, closeModal, src, alt }) => {
   return (
     <Modal
       isOpen={modalIsOpen}

@@ -3,7 +3,7 @@ import './App.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { PhotoService } from '../PhotoService/PhotoService';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
-import { OpenModal } from '../OpenModal/OpenModal';
+import { ImageModal } from '../ImageModal/ImageModal';
 import { ColorRingSpinners } from '../Loader/ColorRingSpinners';
 import { Toaster } from 'react-hot-toast';
 import { LoadMoreBtn } from '../LoadMoreBtn/LoadMoreBtn';
@@ -64,7 +64,7 @@ function App() {
       {loader && <ColorRingSpinners />}
       <ImageGallery photos={photos} openModal={openModal} />
       {showBtnGalery > 0 && <LoadMoreBtn onClick={hendleLoadMoreBtn} />}
-      <OpenModal
+      <ImageModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         src={imageNow.src}

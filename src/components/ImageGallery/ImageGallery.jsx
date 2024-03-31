@@ -10,7 +10,11 @@ export const ImageGallery = ({ photos, openModal }) => {
           key={id}
           onClick={() => openModal({ src: regular, alt: alt_description })}
         >
-          <ImageCard description={alt_description} small={small} />
+          <ImageCard
+            description={alt_description}
+            small={small}
+            onClick={() => openModal({ src: regular, alt: alt_description })}
+          />
         </li>
       ))}
     </ul>
