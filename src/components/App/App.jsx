@@ -18,11 +18,14 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
   const [showBtnGalery, setShowBtnGalery] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   useEffect(() => {
     const searchPhoto = async (query, page = 1) => {
+      if (!query) return;
       try {
         setLoader(true);
+        setError(false);
         const data = await PhotoService(query, page);
         setShowBtnGalery(data.total_pages && data.total_pages !== page);
         setPhotos(prev => [...prev, ...data.results]);
@@ -31,6 +34,7 @@ function App() {
         setError(true);
       } finally {
         setLoader(false);
+        setIsFirstLoad(false);
       }
     };
     searchPhoto(search, page);
@@ -52,6 +56,7 @@ function App() {
     setSearch(search);
     setPage(1);
     setPhotos([]);
+    setError(false);
   };
   const hendleLoadMoreBtn = () => {
     setPage(prevPage => prevPage + 1);
@@ -60,7 +65,7 @@ function App() {
   return (
     <div>
       <SearchBar handleSubmit={handleSubmit} />
-      {error && <ErrorMessage />}
+      {!isFirstLoad && error && <ErrorMessage />}
       {loader && <ColorRingSpinners />}
       <ImageGallery photos={photos} openModal={openModal} />
       {showBtnGalery > 0 && <LoadMoreBtn onClick={hendleLoadMoreBtn} />}
